@@ -23,6 +23,13 @@
 #include <iostream>
 using namespace std;
 
+typedef enum menu_choice_e {
+    MENU_EXIT = 0,
+    MENU_SUM = 1,
+    MENU_MULTIPLY = 2,
+    MENU_EVEN_ODD = 3
+} menu_choice_t;
+
 int main() {
 
     // ========================================================================
@@ -37,8 +44,12 @@ int main() {
     // Example output: "Hello, Ali! Welcome to the Loops Lab."
 
     // TODO: Declare a string variable for the name
+    std::string name;
     // TODO: Prompt the user and read the name with cin
+    std::cout << "Please enter your name: ";
+    std::cin >> name;
     // TODO: Print the greeting
+    std::cout << "Hello, " << name << "! Welcome to the Loops Lab.\n";
 
     cout << endl;
 
@@ -49,8 +60,13 @@ int main() {
     //   Product: 28
 
     // TODO: Declare two int variables
+    int a, b;
     // TODO: Prompt and read both integers
+    std::cout << "Enter 2 integers: ";
+    std::cin >> a >> b;
     // TODO: Print the sum and product
+    std::cout << "Sum : " << a + b;
+    std::cout << "Product : " << a * b;
 
     cout << endl;
 
@@ -80,6 +96,12 @@ int main() {
 
     cout << "Even numbers (while): ";
     // TODO: Write a while loop that prints even numbers from 2 to 20
+    int i = 2;
+    while (i <= 20) {
+        std::cout << i << " ";
+        i += 2;
+    }
+    std::cout << std::endl;
 
     cout << endl;
 
@@ -100,6 +122,10 @@ int main() {
 
     cout << "Odd numbers (for): ";
     // TODO: Write a for loop that prints odd numbers from 1 to 15
+    for (int i = 1; i <= 15; i += 2) {
+        std::cout << i << " ";
+    }
+    std::cout << std::endl;
 
     cout << endl;
 
@@ -124,8 +150,14 @@ int main() {
     // Then print: "You entered: X"
 
     // TODO: Declare an int variable
+    int x = -1;
     // TODO: Write a do-while loop that validates input (1-10)
+    do {
+        std::cout << "Enter a value [1, 10]: ";
+        std::cin >> x;
+    } while (x > 10 || x < 0);
     // TODO: Print the valid number
+    std::cout << "Number " << x << " is a valid number in [1, 10]\n";
 
     cout << endl;
 
@@ -144,8 +176,18 @@ int main() {
 
     cout << "-- Exercise 3.1: Countdown --" << endl;
     // TODO: Ask user for a starting number
+    int countdown;
+    do {
+        std::cout << "Enter a value for the countdown (more than 0): ";
+        std::cin >> countdown;
+    } while (countdown <= 0);
     // TODO: Use a loop to count down to 1, printing each number followed by "... "
+    while (countdown) {
+        std::cout << countdown << "... ";
+        countdown--;
+    }
     // TODO: After the loop, print "Liftoff!"
+    std::cout << "Liftoff!\n";
 
     cout << endl;
 
@@ -160,8 +202,19 @@ int main() {
     //   Total sum: 35
 
     cout << "-- Exercise 3.2: Sum Calculator --" << endl;
+    int num_count, tmp, sum = 0;
     // TODO: Ask how many numbers
+    do {
+        std::cout << "How many numbers? ";
+        std::cin >> num_count;
+    } while (num_count <= 0);
     // TODO: Use a for loop to read each number and accumulate the sum
+    for (int i = 1; i <= num_count; i++) {
+        std::cout << "Enter number " << i << ": ";
+        std::cin >> tmp;
+        sum += tmp;
+    }
+    std::cout << "Total sum : " << sum;
     // TODO: Print the total sum
 
     cout << endl;
@@ -177,8 +230,14 @@ int main() {
 
     cout << "-- Exercise 3.3: Multiplication Table --" << endl;
     // TODO: Ask for N
+    int n;
+    std::cout << "Enter a number to see a multiplication table from 1 to 10: ";
+    std::cin >> n;
     // TODO: Use a for loop from 1 to 10
     // TODO: Print each line: N x i = N*i
+    for (int i = 1; i <= 10; i++) {
+        std::cout << n << " x " << i << " = " << n * i << "\n";
+    }
 
     cout << endl;
 
@@ -191,9 +250,19 @@ int main() {
 
     cout << "-- Exercise 3.4: Factorial --" << endl;
     // TODO: Ask for N (non-negative integer)
+    int factorial, factorial_res = 1;
+    do {
+        std::cout << "Enter a non-negative integer for factorial calculation: ";
+        std::cin >> factorial;
+    } while (factorial < 0);
     // TODO: Use a loop to calculate the factorial
     //       Hint: start with result = 1, multiply by each number from 1 to N
+    for (int i = 1; i <= factorial; i++) {
+        factorial_res *= i;
+    }
+
     // TODO: Print the result
+    std::cout << factorial << "! = " << factorial_res << "\n";
 
     cout << endl;
 
@@ -213,6 +282,16 @@ int main() {
     //       - Increment the counter
     //       - Print "Too high!" or "Too low!" if wrong
     // TODO: Print "Correct! You guessed it in X tries."
+    int guess = secret, counter = 0;
+    do {
+        /* Enters this if only for the first time */
+        if (guess == secret) std::cout << "Enter a number to guess\n";
+        else if (guess < secret) std::cout << "Too low!\n";
+        else if (guess > secret) std::cout << "Too high!\n";
+        std::cin >> guess;
+        counter++;
+    } while (guess != secret);
+    std::cout << "Correct! You guessed it in " << counter << " tries.";
 
     cout << endl;
 
@@ -234,6 +313,16 @@ int main() {
     // TODO: Outer loop for each row (1 to N)
     //       TODO: Inner loop to print the correct number of '*' characters
     //       TODO: Print a newline after each row
+    int row_count;
+    do {
+        std::cout << "Enter a row count for the pattern printer: ";
+        std::cin >> row_count;
+    } while (row_count <= 0);
+
+    for (int i = 0; i <= row_count; i++) {
+        for (int j = 0; j < i; j++) std::cout << "*";
+        std::cout << "\n";
+    }
 
     cout << endl;
 
@@ -254,8 +343,18 @@ int main() {
 
     cout << "-- Challenge 4.1: Digit Counter --" << endl;
     // TODO: Ask for a positive integer
+    int integer, digit_count = 0;
+    do {
+        std::cout << "Enter a positive integer for digit counting: ";
+        std::cin >> integer;
+    } while (integer <= 0);
     // TODO: Use a while loop to count digits
+    while (integer) {
+        integer /= 10;
+        digit_count++;
+    }
     // TODO: Print the digit count
+    std::cout << "Digit count " << digit_count << "\n";
 
     cout << endl;
 
@@ -279,12 +378,49 @@ int main() {
 
     cout << "-- Challenge 4.2: Mini Calculator --" << endl;
     // TODO: Declare a variable for the menu choice
+    bool running = true;
+    int choice; /* I don't want to overload the operator for a simple enum this is normally a menu_choice_t */
     // TODO: Write a do-while loop that:
     //       - Prints the menu
     //       - Reads the choice
     //       - Uses if/else or switch to handle each option
     //       - Loops back unless choice == 0
     // TODO: Print "Goodbye!" when exiting
+    while (running) {
+            std::cout <<
+R"(=== MINI CALCULATOR ===
+1. Add two numbers
+2. Multiply two numbers
+3. Check if a number is even or odd
+0. Exit
+Choice:)";
+        std::cin >> choice;
+        switch (choice) {
+        case MENU_EXIT: {
+            running = false;
+        } break;
+        case MENU_SUM: {
+            int a, b;
+            std::cout << "Enter 2 values to sum: ";
+            std::cin >> a >> b;
+            std::cout << a << " + " << b << " = " << a + b << "\n";
+        } break;
+        case MENU_MULTIPLY: {
+            int a, b;
+            std::cout << "Enter 2 values to multiply: ";
+            std::cin >> a >> b;
+            std::cout << a << " x " << b << " = " << a * b << "\n";
+        } break;
+        case MENU_EVEN_ODD: {
+            int var;
+            std::cout << "Enter a value to see even or odd: ";
+            std::cin >> var;
+            std::cout << (var % 2 ?  "Odd" : "Even") << "\n";
+        } break;
+        default:
+            std::cout << "Unknown choice\n";
+        }
+    }
 
     cout << endl;
 
